@@ -1,0 +1,266 @@
+{
+  "max_wal_senders": {
+    "range": "5 to 10",
+    "min": 5,
+    "max": 10,
+    "percentage": "10% to 20%"
+  },
+  "autovacuum_max_workers": {
+    "range": "81 to 100",
+    "min": 81,
+    "max": 100,
+    "percentage": "40% to 50%"
+  },
+  "max_connections": {
+    "range": "1525 to 1820",
+    "min": 1525,
+    "max": 1820,
+    "percentage": "50% to 60%"
+  },
+  "wal_buffers": {
+    "range": "104857 to 117965",
+    "min": 104857,
+    "max": 117965,
+    "percentage": "80% to 90%"
+  },
+  "shared_buffers": {
+    "range": "16 to 419445",
+    "min": 16,
+    "max": 419445,
+    "percentage": "00% to 10%"
+  },
+  "autovacuum_analyze_scale_factor": {
+    "range": "40.0 to 50.0",
+    "min": 40.0,
+    "max": 50.0,
+    "percentage": "40% to 50%"
+  },
+  "autovacuum_analyze_threshold": {
+    "range": "1503238553 to 1717986918",
+    "min": 1503238553,
+    "max": 1717986918,
+    "percentage": "70% to 80%"
+  },
+  "autovacuum_naptime": {
+    "range": "858994 to 1073742",
+    "min": 858994,
+    "max": 1073742,
+    "percentage": "40% to 50%"
+  },
+  "autovacuum_vacuum_cost_delay": {
+    "range": "90 to 100",
+    "min": 90,
+    "max": 100,
+    "percentage": "90% to 100%"
+  },
+  "autovacuum_vacuum_cost_limit": {
+    "range": "6000 to 7000",
+    "min": 6000,
+    "max": 7000,
+    "percentage": "60% to 70%"
+  },
+  "autovacuum_vacuum_scale_factor": {
+    "range": "20.0 to 30.0",
+    "min": 20.0,
+    "max": 30.0,
+    "percentage": "20% to 30%"
+  },
+  "autovacuum_vacuum_threshold": {
+    "range": "1503238553 to 1717986918",
+    "min": 1503238553,
+    "max": 1717986918,
+    "percentage": "70% to 80%"
+  },
+  "backend_flush_after": {
+    "range": "77 to 102",
+    "min": 77,
+    "max": 102,
+    "percentage": "30% to 40%"
+  },
+  "bgwriter_delay": {
+    "range": "9001 to 10000",
+    "min": 9001,
+    "max": 10000,
+    "percentage": "90% to 100%"
+  },
+  "bgwriter_flush_after": {
+    "range": "51 to 77",
+    "min": 51,
+    "max": 77,
+    "percentage": "20% to 30%"
+  },
+  "bgwriter_lru_maxpages": {
+    "range": "700 to 800",
+    "min": 700,
+    "max": 800,
+    "percentage": "70% to 80%"
+  },
+  "bgwriter_lru_multiplier": {
+    "range": "1 to 2",
+    "min": 1,
+    "max": 2,
+    "percentage": "10% to 20%"
+  },
+  "checkpoint_completion_target": {
+    "range": "0.9 to 1.0",
+    "min": 0.9,
+    "max": 1.0,
+    "percentage": "90% to 100%"
+  },
+  "checkpoint_flush_after": {
+    "range": "179 to 205",
+    "min": 179,
+    "max": 205,
+    "percentage": "70% to 80%"
+  },
+  "checkpoint_timeout": {
+    "range": "2172 to 2529",
+    "min": 2172,
+    "max": 2529,
+    "percentage": "60% to 70%"
+  },
+  "commit_delay": {
+    "range": "90000 to 100000",
+    "min": 90000,
+    "max": 100000,
+    "percentage": "90% to 100%"
+  },
+  "commit_siblings": {
+    "range": "900 to 1000",
+    "min": 900,
+    "max": 1000,
+    "percentage": "90% to 100%"
+  },
+  "cursor_tuple_fraction": {
+    "range": "0.0 to 0.1",
+    "min": 0.0,
+    "max": 0.1,
+    "percentage": "00% to 10%"
+  },
+  "deadlock_timeout": {
+    "range": "1503238553 to 1717986918",
+    "min": 1503238553,
+    "max": 1717986918,
+    "percentage": "70% to 80%"
+  },
+  "default_statistics_target": {
+    "range": "8000 to 9000",
+    "min": 8000,
+    "max": 9000,
+    "percentage": "80% to 90%"
+  },
+  "effective_cache_size": {
+    "range": "1288490189 to 1503238553",
+    "min": 1288490189,
+    "max": 1503238553,
+    "percentage": "60% to 70%"
+  },
+  "effective_io_concurrency": {
+    "range": "100 to 200",
+    "min": 100,
+    "max": 200,
+    "percentage": "10% to 20%"
+  },
+  "from_collapse_limit": {
+    "range": "858993459 to 1073741824",
+    "min": 858993459,
+    "max": 1073741824,
+    "percentage": "40% to 50%"
+  },
+  "geqo_effort": {
+    "range": "7 to 8",
+    "min": 7,
+    "max": 8,
+    "percentage": "70% to 80%"
+  },
+  "geqo_generations": {
+    "range": "1503238553 to 1717986918",
+    "min": 1503238553,
+    "max": 1717986918,
+    "percentage": "70% to 80%"
+  },
+  "geqo_pool_size": {
+    "range": "1932735282 to 2147483647",
+    "min": 1932735282,
+    "max": 2147483647,
+    "percentage": "90% to 100%"
+  },
+  "geqo_seed": {
+    "range": "0.9 to 1.0",
+    "min": 0.9,
+    "max": 1.0,
+    "percentage": "90% to 100%"
+  },
+  "geqo_threshold": {
+    "range": "1288490189 to 1503238554",
+    "min": 1288490189,
+    "max": 1503238554,
+    "percentage": "60% to 70%"
+  },
+  "join_collapse_limit": {
+    "range": "1073741824 to 1288490189",
+    "min": 1073741824,
+    "max": 1288490189,
+    "percentage": "50% to 60%"
+  },
+  "maintenance_work_mem": {
+    "range": "214749286 to 429497549",
+    "min": 214749286,
+    "max": 429497549,
+    "percentage": "10% to 20%"
+  },
+  "temp_buffers": {
+    "range": "107374272 to 214748445",
+    "min": 107374272,
+    "max": 214748445,
+    "percentage": "10% to 20%"
+  },
+  "temp_file_limit": {
+    "range": "1073741823 to 1073741823",
+    "min": 1073741823,
+    "max": 1073741823,
+    "percentage": "middle"
+  },
+  "vacuum_cost_delay": {
+    "range": "40 to 50",
+    "min": 40,
+    "max": 50,
+    "percentage": "40% to 50%"
+  },
+  "vacuum_cost_limit": {
+    "range": "8000 to 9000",
+    "min": 8000,
+    "max": 9000,
+    "percentage": "80% to 90%"
+  },
+  "vacuum_cost_page_dirty": {
+    "range": "3000 to 4000",
+    "min": 3000,
+    "max": 4000,
+    "percentage": "30% to 40%"
+  },
+  "vacuum_cost_page_hit": {
+    "range": "5000 to 6000",
+    "min": 5000,
+    "max": 6000,
+    "percentage": "50% to 60%"
+  },
+  "vacuum_cost_page_miss": {
+    "range": "9000 to 10000",
+    "min": 9000,
+    "max": 10000,
+    "percentage": "90% to 100%"
+  },
+  "wal_writer_delay": {
+    "range": "6000 to 7000",
+    "min": 6000,
+    "max": 7000,
+    "percentage": "60% to 70%"
+  },
+  "work_mem": {
+    "range": "1288490214 to 1503238572",
+    "min": 1288490214,
+    "max": 1503238572,
+    "percentage": "60% to 70%"
+  }
+}
