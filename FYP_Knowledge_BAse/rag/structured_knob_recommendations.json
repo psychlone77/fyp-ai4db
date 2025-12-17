@@ -1,0 +1,187 @@
+{
+  "total_knobs": 13,
+  "knobs": [
+    {
+      "knob_name": "work_mem",
+      "recommended_value": "32 MB",
+      "unit": "MB",
+      "reasoning": "Set within 10\u201150\u202fMB range to keep sorts/aggregations in memory for large GROUP BY/ORDER BY",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": 64,
+        "max": 2147483647,
+        "default": 4096.0,
+        "step": 64
+      }
+    },
+    {
+      "knob_name": "maintenance_work_mem",
+      "recommended_value": "2 GB",
+      "unit": "GB",
+      "reasoning": "\u22485% of 40\u202fGB RAM, speeds index builds and VACUUM for analytical tasks",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": 1024,
+        "max": 2147483647,
+        "default": 65536.0,
+        "step": 128
+      }
+    },
+    {
+      "knob_name": "shared_buffers",
+      "recommended_value": "\u224830% of total RAM (25%\u201340%)",
+      "unit": null,
+      "reasoning": "Provides high buffer hit ratio while leaving sufficient OS cache memory",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": 16.0,
+        "max": 4194304,
+        "default": 1024.0,
+        "step": 1
+      }
+    },
+    {
+      "knob_name": "checkpoint_timeout",
+      "recommended_value": "30\u202fminutes\u20131\u202fhour (e.g., 45\u202fmin)",
+      "unit": null,
+      "reasoning": "Spreads checkpoints to avoid I/O spikes for read\u2011heavy workloads",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": 30,
+        "max": 3600,
+        "default": 300.0,
+        "step": 10
+      }
+    },
+    {
+      "knob_name": "checkpoint_completion_target",
+      "recommended_value": "0.9",
+      "unit": null,
+      "reasoning": "Spreads checkpoint I/O over most of the interval, flattening I/O load",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "float",
+        "min": 0,
+        "max": 1,
+        "default": 0.9,
+        "step": 0.1
+      }
+    },
+    {
+      "knob_name": "wal_buffers",
+      "recommended_value": "16 MB",
+      "unit": "MB",
+      "reasoning": "Sufficient for OLAP read workloads while conserving shared memory",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": -1.0,
+        "max": 131072,
+        "default": -1,
+        "step": 1
+      }
+    },
+    {
+      "knob_name": "autovacuum_naptime",
+      "recommended_value": "60",
+      "unit": "seconds",
+      "reasoning": "Balanced frequency to keep statistics fresh without excessive CPU usage",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": 1,
+        "max": 2147483,
+        "default": 60.0,
+        "step": 60
+      }
+    },
+    {
+      "knob_name": "autovacuum_vacuum_scale_factor",
+      "recommended_value": "0.1",
+      "unit": null,
+      "reasoning": "Triggers vacuum after 10% of rows change, balancing cleanup and overhead",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "float",
+        "min": 0,
+        "max": 100,
+        "default": 0.2,
+        "step": 1
+      }
+    },
+    {
+      "knob_name": "autovacuum_analyze_scale_factor",
+      "recommended_value": "0.05",
+      "unit": null,
+      "reasoning": "Keeps statistics fresh for high\u2011filter and join workloads",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "float",
+        "min": 0,
+        "max": 100,
+        "default": 0.1,
+        "step": 1
+      }
+    },
+    {
+      "knob_name": "autovacuum_vacuum_threshold",
+      "recommended_value": "50",
+      "unit": null,
+      "reasoning": "Ensures small tables are vacuumed promptly",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": 0,
+        "max": 2147483647,
+        "default": 50.0,
+        "step": 50
+      }
+    },
+    {
+      "knob_name": "autovacuum_analyze_threshold",
+      "recommended_value": "50",
+      "unit": null,
+      "reasoning": "Ensures small tables are analyzed promptly",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": 0,
+        "max": 2147483647,
+        "default": 50.0,
+        "step": 50
+      }
+    },
+    {
+      "knob_name": "autovacuum_vacuum_cost_limit",
+      "recommended_value": "200 (default) \u2013 raise to 500\u20111000 if needed",
+      "unit": null,
+      "reasoning": "Controls vacuum I/O aggressiveness; higher limit speeds cleanup at cost of I/O contention",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": -1,
+        "max": 10000,
+        "default": -1.0,
+        "step": 1
+      }
+    },
+    {
+      "knob_name": "autovacuum_max_workers",
+      "recommended_value": null,
+      "unit": null,
+      "reasoning": "Mentioned as a limit to keep number of workers \u2264 max_worker_processes - max_parallel_workers",
+      "workload_context": "OLAP",
+      "schema_info": {
+        "type": "integer",
+        "min": 1.0,
+        "max": 200,
+        "default": 3.0,
+        "step": 1
+      }
+    }
+  ]
+}

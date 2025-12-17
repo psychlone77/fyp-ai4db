@@ -1,0 +1,81 @@
+================================================================================
+STRUCTURED KNOB RECOMMENDATIONS
+================================================================================
+
+1. work_mem
+   Recommended: 32 MB MB
+   Context: OLAP
+   Reasoning: Set within 10‑50 MB range to keep sorts/aggregations in memory for large GROUP BY/ORDER BY
+   Schema: type=integer, range=[64, 2147483647], default=4096.0
+
+2. maintenance_work_mem
+   Recommended: 2 GB GB
+   Context: OLAP
+   Reasoning: ≈5% of 40 GB RAM, speeds index builds and VACUUM for analytical tasks
+   Schema: type=integer, range=[1024, 2147483647], default=65536.0
+
+3. shared_buffers
+   Recommended: ≈30% of total RAM (25%–40%) None
+   Context: OLAP
+   Reasoning: Provides high buffer hit ratio while leaving sufficient OS cache memory
+   Schema: type=integer, range=[16.0, 4194304], default=1024.0
+
+4. checkpoint_timeout
+   Recommended: 30 minutes–1 hour (e.g., 45 min) None
+   Context: OLAP
+   Reasoning: Spreads checkpoints to avoid I/O spikes for read‑heavy workloads
+   Schema: type=integer, range=[30, 3600], default=300.0
+
+5. checkpoint_completion_target
+   Recommended: 0.9 None
+   Context: OLAP
+   Reasoning: Spreads checkpoint I/O over most of the interval, flattening I/O load
+   Schema: type=float, range=[0, 1], default=0.9
+
+6. wal_buffers
+   Recommended: 16 MB MB
+   Context: OLAP
+   Reasoning: Sufficient for OLAP read workloads while conserving shared memory
+   Schema: type=integer, range=[-1.0, 131072], default=-1
+
+7. autovacuum_naptime
+   Recommended: 60 seconds
+   Context: OLAP
+   Reasoning: Balanced frequency to keep statistics fresh without excessive CPU usage
+   Schema: type=integer, range=[1, 2147483], default=60.0
+
+8. autovacuum_vacuum_scale_factor
+   Recommended: 0.1 None
+   Context: OLAP
+   Reasoning: Triggers vacuum after 10% of rows change, balancing cleanup and overhead
+   Schema: type=float, range=[0, 100], default=0.2
+
+9. autovacuum_analyze_scale_factor
+   Recommended: 0.05 None
+   Context: OLAP
+   Reasoning: Keeps statistics fresh for high‑filter and join workloads
+   Schema: type=float, range=[0, 100], default=0.1
+
+10. autovacuum_vacuum_threshold
+   Recommended: 50 None
+   Context: OLAP
+   Reasoning: Ensures small tables are vacuumed promptly
+   Schema: type=integer, range=[0, 2147483647], default=50.0
+
+11. autovacuum_analyze_threshold
+   Recommended: 50 None
+   Context: OLAP
+   Reasoning: Ensures small tables are analyzed promptly
+   Schema: type=integer, range=[0, 2147483647], default=50.0
+
+12. autovacuum_vacuum_cost_limit
+   Recommended: 200 (default) – raise to 500‑1000 if needed None
+   Context: OLAP
+   Reasoning: Controls vacuum I/O aggressiveness; higher limit speeds cleanup at cost of I/O contention
+   Schema: type=integer, range=[-1, 10000], default=-1.0
+
+13. autovacuum_max_workers
+   Recommended: None None
+   Context: OLAP
+   Reasoning: Mentioned as a limit to keep number of workers ≤ max_worker_processes - max_parallel_workers
+   Schema: type=integer, range=[1.0, 200], default=3.0

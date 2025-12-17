@@ -1,4 +1,5 @@
 import os
+import json
 from pathlib import Path
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_groq import ChatGroq
@@ -90,7 +91,7 @@ Answer:"""
     )
     
     # Create retriever
-    retriever = vector_store.as_retriever(search_kwargs={"k": 5})
+    retriever = vector_store.as_retriever(search_kwargs={"k":3})
     
     # Create chain using LCEL
     rag_chain = (
@@ -166,6 +167,8 @@ def main():
     print("OLAP PARAMETER EXTRACTION RAG")
     print("="*60)
     
+    # Prepare results list
+    results = []
     for query in queries:
         print(f"\nQuery: {query}")
         print("-" * 60)
@@ -173,6 +176,20 @@ def main():
         print(f"Answer: {result['answer']}")
         print(f"\nSources: {[doc.metadata.get('source', 'Unknown') for doc in result['source_documents']]}")
         print("="*60)
+        
+        # Add to results list
+        results.append({
+            "query": query,
+            "answer": result['answer'],
+            "sources": [doc.metadata.get('source', 'Unknown') for doc in result['source_documents']]
+        })
+    
+    # Save to JSON file
+    output_file = script_dir / "rag_results.json"
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    
+    print(f"\nResults saved to {output_file}")
 
 if __name__ == "__main__":
     main()
