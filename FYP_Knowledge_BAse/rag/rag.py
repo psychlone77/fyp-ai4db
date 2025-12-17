@@ -9,6 +9,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain_huggingface import HuggingFaceEmbeddings
+from rag_question_generator import LLMRAGQuestionGenerator
+from example_input import workload_features, query_plans, inner_metrics
 load_dotenv()
 
 # Load documents from resources folder
@@ -119,7 +121,9 @@ def query_olap_parameters(rag_chain, retriever, query: str):
 
 # Main execution
 def main():
-    resources_path = "resources"
+    # Get the directory where this script is located
+    script_dir = Path(__file__).parent
+    resources_path = script_dir.parent / "resources"
     
     # Check if vector store already exists
     if os.path.exists("faiss_index"):
@@ -145,13 +149,18 @@ def main():
     # Step 4: Create RAG chain
     print("\nCreating RAG chain...")
     rag_chain, retriever = create_rag_chain(vector_store)
-    
+
     # Step 5: Query examples
-    queries = [
-        "What parameters that mostly affect the query performance in OLAP workloads?",
-        "What are the key OLAP tuning parameters and their recommended optimal values?",
+    generator = LLMRAGQuestionGenerator()
+    queries = generator.generate_questions(
+        workload_features, query_plans, inner_metrics
+    )
+   
+    # queries = [
+    #     "What parameters that mostly affect the query performance in OLAP workloads?",
+    #     "What are the key OLAP tuning parameters and their recommended optimal values?",
         
-    ]
+    # ]
     
     print("\n" + "="*60)
     print("OLAP PARAMETER EXTRACTION RAG")
