@@ -1,9 +1,13 @@
 import json
+import os
 import re
 from typing import Dict, Tuple, Union
 
 # Configuration schema
 from config_schema import config_schema
+
+# Get script directory for relative paths
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Percentage input
 percentage_input = {
@@ -136,8 +140,10 @@ def print_results(results: Dict, detailed: bool = True):
         print()
 
 
-def export_to_json(results: Dict, filename: str = 'postgres_config_ranges.json'):
+def export_to_json(results: Dict, filename: str = None):
     """Export results to JSON file."""
+    if filename is None:
+        filename = os.path.join(SCRIPT_DIR, 'llm_config_ranges.json')
     export_data = {}
     for key, data in results.items():
         export_data[key] = {

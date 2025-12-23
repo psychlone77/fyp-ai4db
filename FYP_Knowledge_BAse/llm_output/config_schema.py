@@ -1,3 +1,7 @@
+#step : step size for incrementing/decrementing the parameter
+
+
+
 config_schema = {
     "max_wal_senders": {"step": 1, "type": "integer", "default": 10.0, "min": 0.0, "max": 50},
     "autovacuum_max_workers": {"step": 1, "type": "integer", "default": 3.0, "min": 1.0, "max": 200},

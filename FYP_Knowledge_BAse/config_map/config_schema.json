@@ -1,0 +1,398 @@
+{
+  "max_wal_senders": {
+    "type": "integer",
+    "default": 10,
+    "min": 0,
+    "max": 50,
+    "step": 1,
+    "unit": "count",
+    "description": "number of concurrent connections that can send WAL data to standby servers or streaming clients."
+  },
+  "autovacuum_max_workers": {
+    "type": "integer",
+    "default": 3,
+    "min": 1,
+    "max": 200,
+    "step": 1,
+    "unit": "count",
+    "description": "perform automatic VACUUM and ANALYZE tasks, cleaning up dead tuples (bloat) from updated/deleted rows and updating statistics for query planning, ensuring efficient space reuse and good performance without manual intervention."
+  },
+  "max_connections": {
+    "type": "integer",
+    "default": 100,
+    "min": 50,
+    "max": 3000,
+    "step": 1,
+    "unit": "count",
+    "description": "maximum number of concurrent connections to the database server."
+  },
+  "wal_buffers": {
+    "type": "integer",
+    "default": -1,
+    "min": -1,
+    "max": 131072,
+    "step": 1,
+    "unit": "8KB  ",
+    "description": "size of the shared memory buffer used for WAL data."
+  },
+  "shared_buffers": {
+    "type": "integer",
+    "default": 1024,
+    "min": 16,
+    "max": 4194304,
+    "step": 1,
+    "unit": "8KB  ",
+    "description": "size of the shared memory buffer used for caching data pages."
+  },
+  "autovacuum_analyze_scale_factor": {
+    "type": "float",
+    "default": 0.1,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "percentage",
+    "description": "proportion of table size that, when exceeded by the number of updated or deleted tuples, triggers an automatic ANALYZE operation to update statistics for query planning."
+  },
+  "autovacuum_analyze_threshold": {
+    "type": "integer",
+    "default": 50,
+    "min": 0,
+    "max": 2147483647,
+    "step": 50,
+    "unit": "count",
+    "description": "minimum number of updated or deleted tuples that triggers an automatic ANALYZE operation to update statistics for query planning."
+  },
+  "autovacuum_naptime": {
+    "type": "integer",
+    "default": 60,
+    "min": 1,
+    "max": 2147483,
+    "step": 60,
+    "unit": "s",
+    "description": "interval between autovacuum runs."
+  },
+  "autovacuum_vacuum_cost_delay": {
+    "type": "integer",
+    "default": 2,
+    "min": -1,
+    "max": 100,
+    "step": 1,
+    "unit": "milli s",
+    "description": "delay between autovacuum operations to limit I/O impact."
+  },
+  "autovacuum_vacuum_cost_limit": {
+    "type": "integer",
+    "default": -1,
+    "min": -1,
+    "max": 10000,
+    "step": 1,
+    "unit": "count",
+    "description": "maximum number of tuples that can be processed in a single autovacuum operation."
+  },
+  "autovacuum_vacuum_scale_factor": {
+    "type": "float",
+    "default": 0.2,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "percentage",
+    "description": "proportion of table size that, when exceeded by the number of updated or deleted tuples, triggers an automatic VACUUM operation to clean up dead tuples."
+  },
+  "autovacuum_vacuum_threshold": {
+    "type": "integer",
+    "default": 50,
+    "min": 0,
+    "max": 2147483647,
+    "step": 50,
+    "unit": "count",
+    "description": "minimum number of updated or deleted tuples that triggers an automatic VACUUM operation to clean up dead tuples."
+  },
+  "backend_flush_after": {
+    "type": "integer",
+    "default": 0,
+    "min": 0,
+    "max": 256,
+    "step": 1,
+    "unit": "8KB",
+    "description": "number of data pages that a backend process will flush to disk after a write operation."
+  },
+  "bgwriter_delay": {
+    "type": "integer",
+    "default": 200,
+    "min": 10,
+    "max": 10000,
+    "step": 10,
+    "unit": "milli s",
+    "description": "time interval between background writer operations."
+  },
+  "bgwriter_flush_after": {
+    "type": "integer",
+    "default": 64,
+    "min": 0,
+    "max": 256,
+    "step": 1,
+    "unit": "8KB",
+    "description": "number of data pages that the background writer will flush to disk after a write operation."
+  },
+  "bgwriter_lru_maxpages": {
+    "type": "integer",
+    "default": 2,
+    "min": 0,
+    "max": 1000,
+    "step": 10,
+    "unit": "count",
+    "description": "maximum number of LRU pages that the background writer will write per round."
+  },
+  "bgwriter_lru_multiplier": {
+    "type": "integer",
+    "default": 2,
+    "min": 0,
+    "max": 10,
+    "step": 1,
+    "unit": "multiplier",
+    "description": "multiplier for the number of LRU pages that the background writer will write per round."
+  },
+  "checkpoint_completion_target": {
+    "type": "float",
+    "default": 0.9,
+    "min": 0,
+    "max": 1,
+    "step": 0.1,
+    "unit": "fraction",
+    "description": "target duration for checkpoint completion as a fraction of the checkpoint interval."
+  },
+  "checkpoint_flush_after": {
+    "type": "integer",
+    "default": 32,
+    "min": 0,
+    "max": 256,
+    "step": 2,
+    "unit": "8KB",
+    "description": "number of data pages that will be flushed to disk after a checkpoint."
+  },
+  "checkpoint_timeout": {
+    "type": "integer",
+    "default": 300,
+    "min": 30,
+    "max": 3600,
+    "step": 10,
+    "unit": " s",
+    "description": "maximum time between automatic WAL checkpoints."
+  },
+  "commit_delay": {
+    "type": "integer",
+    "default": 0,
+    "min": 0,
+    "max": 100000,
+    "step": 10,
+    "unit": "micro s",
+    "description": "delay between transaction commit and flushing WAL to disk."
+  },
+  "commit_siblings": {
+    "type": "integer",
+    "default": 5,
+    "min": 0,
+    "max": 1000,
+    "step": 5,
+    "unit": "count",
+    "description": "number of concurrent open transactions required to trigger commit_delay."
+  },
+  "cursor_tuple_fraction": {
+    "type": "float",
+    "default": 0.1,
+    "min": 0,
+    "max": 1,
+    "step": 0.1,
+    "unit": "fraction",
+    "description": "fraction of the result set that will be retrieved by a cursor."
+  },
+  "deadlock_timeout": {
+    "type": "integer",
+    "default": 1000,
+    "min": 1,
+    "max": 2147483647,
+    "step": 10,
+    "unit": "milli s",
+    "description": "time to wait on a lock before checking for deadlock."
+  },
+  "default_statistics_target": {
+    "type": "integer",
+    "default": 100,
+    "min": 1,
+    "max": 10000,
+    "step": 10,
+    "unit": "count",
+    "description": "default level of detail for table statistics used by the query planner."
+  },
+  "effective_cache_size": {
+    "type": "integer",
+    "default": 524288,
+    "min": 1,
+    "max": 2147483647,
+    "step": 64,
+    "unit": "8KB  ",
+    "description": "estimated size of the disk cache available to PostgreSQL for caching data pages."
+  },
+  "effective_io_concurrency": {
+    "type": "integer",
+    "default": 1,
+    "min": 0,
+    "max": 1000,
+    "step": 1,
+    "unit": "count",
+    "description": "number of concurrent I/O operations that can be performed."
+  },
+  "from_collapse_limit": {
+    "type": "integer",
+    "default": 8,
+    "min": 1,
+    "max": 2147483647,
+    "step": 8,
+    "unit": "count",
+    "description": "maximum number of FROM items that the query planner will consider collapsing into a single join."
+  },
+  "geqo_effort": {
+    "type": "integer",
+    "default": 5,
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "unit": "level",
+    "description": "effort level for the genetic query optimizer (GEQO), influencing the thoroughness of the optimization process."
+  },
+  "geqo_generations": {
+    "type": "integer",
+    "default": 0,
+    "min": 0,
+    "max": 2147483647,
+    "step": 8,
+    "unit": "count",
+    "description": "number of generations for the genetic query optimizer (GEQO) to evolve query plans."
+  },
+  "geqo_pool_size": {
+    "type": "integer",
+    "default": 0,
+    "min": 0,
+    "max": 2147483647,
+    "step": 8,
+    "unit": "count",
+    "description": "size of the population pool for the genetic query optimizer (GEQO)."
+  },
+  "geqo_seed": {
+    "type": "float",
+    "default": 0,
+    "min": 0,
+    "max": 1,
+    "step": 0.1,
+    "unit": "fraction",
+    "description": "seed value for the random number generator used by the genetic query optimizer (GEQO)."
+  },
+  "geqo_threshold": {
+    "type": "integer",
+    "default": 12,
+    "min": 2,
+    "max": 2147483647,
+    "step": 12,
+    "unit": "count",
+    "description": "number of FROM items above which the genetic query optimizer (GEQO) is used."
+  },
+  "join_collapse_limit": {
+    "type": "integer",
+    "default": 8,
+    "min": 1,
+    "max": 2147483647,
+    "step": 8,
+    "unit": "count",
+    "description": "maximum number of JOIN items that the query planner will consider collapsing into a single join."
+  },
+  "maintenance_work_mem": {
+    "type": "integer",
+    "default": 65536,
+    "min": 1024,
+    "max": 2147483647,
+    "step": 128,
+    "unit": "KB ",
+    "description": "amount of memory to be used by maintenance operations, such as VACUUM, CREATE INDEX, and ALTER TABLE ADD FOREIGN KEY."
+  },
+  "temp_buffers": {
+    "type": "integer",
+    "default": 1024,
+    "min": 100,
+    "max": 1073741823,
+    "step": 32,
+    "unit": "8KB  ",
+    "description": "amount of memory allocated for temporary tables used by each database session."
+  },
+  "temp_file_limit": {
+    "type": "integer",
+    "default": -1,
+    "min": -1,
+    "max": 2147483647,
+    "step": 32,
+    "unit": "KB ",
+    "description": "maximum size of temporary files that a session can create."
+  },
+  "vacuum_cost_delay": {
+    "type": "integer",
+    "default": 0,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "milli s",
+    "description": "delay between vacuum operations to limit I/O impact."
+  },
+  "vacuum_cost_limit": {
+    "type": "integer",
+    "default": 200,
+    "min": 1,
+    "max": 10000,
+    "step": 10,
+    "unit": "count",
+    "description": "maximum number of tuples that can be processed in a single vacuum operation."
+  },
+  "vacuum_cost_page_dirty": {
+    "type": "integer",
+    "default": 20,
+    "min": 0,
+    "max": 10000,
+    "step": 5,
+    "unit": "count",
+    "description": "cost assigned to writing a dirty page to disk during vacuum."
+  },
+  "vacuum_cost_page_hit": {
+    "type": "integer",
+    "default": 1,
+    "min": 0,
+    "max": 10000,
+    "step": 1,
+    "unit": "count",
+    "description": "cost assigned to accessing a page that is already in memory during vacuum."
+  },
+  "vacuum_cost_page_miss": {
+    "type": "integer",
+    "default": 2,
+    "min": 0,
+    "max": 10000,
+    "step": 5,
+    "unit": "count",
+    "description": "cost assigned to reading a page from disk during vacuum."
+  },
+  "wal_writer_delay": {
+    "type": "integer",
+    "default": 200,
+    "min": 1,
+    "max": 10000,
+    "step": 5,
+    "unit": "milli s",
+    "description": "time interval between WAL writer operations."
+  },
+  "work_mem": {
+    "type": "integer",
+    "default": 4096,
+    "min": 64,
+    "max": 2147483647,
+    "step": 64,
+    "unit": "KB ",
+    "description": "amount of memory to be used by internal sort operations and hash tables before writing to temporary disk files."
+  }
+}
