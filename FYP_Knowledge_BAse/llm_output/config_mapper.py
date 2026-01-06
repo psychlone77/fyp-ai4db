@@ -105,7 +105,7 @@ def map_percentage_to_values(config_schema: Dict, percentage_input: Dict) -> Dic
             
             results[key] = {
                 'percentage_range': percent_str,
-                'value_range': f"{values['min']} to {values['max']}",
+                'value_range': f"{values['min']} - {values['max']}",
                 'min': values['min'],
                 'max': values['max'],
                 'default': config['default'],
