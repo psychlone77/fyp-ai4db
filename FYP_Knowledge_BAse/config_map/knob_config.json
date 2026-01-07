@@ -1,0 +1,123 @@
+{
+    "shared_buffers": {
+        "describe": "Database memory for data blocks. Set to ~25% of RAM.",
+        "type": "integer",
+        "default": 131072,
+        "min": 16384,
+        "max": 1572864,
+        "unit": "8KB  ",
+        "step": 1024
+    },
+    "work_mem": {
+        "describe": "Memory for internal sort/hash operations before writing to disk.",
+        "type": "integer",
+        "default": 65536,
+        "min": 16384,
+        "max": 262144,
+        "step": 1024
+    },
+    "maintenance_work_mem": {
+        "describe": "Memory used for maintenance tasks like VACUUM and index builds.",
+        "type": "integer",
+        "default": 262144,
+        "min": 65536,
+        "max": 2097152,
+        "step": 16384
+    },
+    "effective_cache_size": {
+        "describe": "Planner's estimate of the OS disk cache availability.",
+        "type": "integer",
+        "default": 3145728,
+        "min": 131072,
+        "max": 3932160,
+        "step": 16384
+    },
+    "max_connections": {
+        "describe": "Maximum concurrent client connections.",
+        "type": "integer",
+        "default": 200,
+        "min": 50,
+        "max": 500,
+        "step": 10
+    },
+    "wal_buffers": {
+        "describe": "Memory for WAL data that has not yet been written to disk.",
+        "type": "integer",
+        "default": 2048,
+        "min": 256,
+        "max": 8192,
+        "step": 32
+    },
+    "checkpoint_completion_target": {
+        "describe": "Fraction of checkpoint time for disk flush to finish.",
+        "type": "float",
+        "default": 0.9,
+        "min": 0.5,
+        "max": 0.9,
+        "step": 0.05
+    },
+    "checkpoint_timeout": {
+        "describe": "Maximum time between automatic WAL checkpoints.",
+        "type": "integer",
+        "default": 900,
+        "min": 300,
+        "max": 1800,
+        "step": 60
+    },
+    "effective_io_concurrency": {
+        "describe": "The number of simultaneous disk I/O operations.",
+        "type": "integer",
+        "default": 100,
+        "min": 1,
+        "max": 300,
+        "step": 10
+    },
+    "join_collapse_limit": {
+        "describe": "Threshold for planner to flatten explicit JOIN clauses.",
+        "type": "integer",
+        "default": 8,
+        "min": 8,
+        "max": 20,
+        "step": 1
+    },
+    "from_collapse_limit": {
+        "describe": "Threshold for planner to flatten sub-queries.",
+        "type": "integer",
+        "default": 8,
+        "min": 8,
+        "max": 20,
+        "step": 1
+    },
+    "bgwriter_delay": {
+        "describe": "Delay between activity rounds for the background writer.",
+        "type": "integer",
+        "default": 200,
+        "min": 10,
+        "max": 1000,
+        "step": 10
+    },
+    "bgwriter_lru_multiplier": {
+        "describe": "Multiplier for the number of buffers to clean in one round.",
+        "type": "float",
+        "default": 2.0,
+        "min": 0.0,
+        "max": 10.0,
+        "step": 0.1
+    },
+    "default_statistics_target": {
+        "describe": "Determines the level of detail for database statistics.",
+        "type": "integer",
+        "default": 100,
+        "min": 10,
+        "max": 500,
+        "step": 10
+    },
+    "max_parallel_workers_per_gather": {
+        "describe": "Max workers used for a single Parallel Gather node.",
+        "type": "integer",
+        "default": 2,
+        "min": 0,
+        "max": 8,
+        "step": 1
+    }
+}

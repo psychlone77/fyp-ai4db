@@ -11,7 +11,9 @@ Generates up to 5 high-quality RAG questions using an LLM (ChatGroq).
 
 import os
 import re
+import json
 from typing import List, Dict, Any
+from pathlib import Path
 
 from langchain_groq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -38,7 +40,7 @@ class LLMRAGQuestionGenerator:
         inner_metrics: Dict[str, Any],
     ) -> List[str]:
         """
-        Generate up to 5 RAG questions from structured workload input.
+        Generate up to 3 RAG questions from structured workload input.
         Output is a plain Python list of strings.
         """
 
@@ -47,7 +49,7 @@ class LLMRAGQuestionGenerator:
             "Your task is to generate concise, high-value questions that can be used\n"
             "to retrieve database configuration and tuning recommendations.\n\n"
             "Rules:\n"
-            "- Generate AT MOST 5 questions\n"
+            "- Generate AT MOST 3 questions\n"
             "- Focus on OLAP-style performance bottlenecks and tuning dimensions\n"
             "- Questions must be suitable for retrieval (RAG)\n"
             "- Avoid questions on indexing, partitioning, or physical design\n"
@@ -66,7 +68,7 @@ class LLMRAGQuestionGenerator:
         Inner Metrics:
         {inner_metrics}
 
-        Generate up to 5 concise questions.
+        Generate up to 3 concise questions.
         Each question must be a single sentence.
         """
 
@@ -86,41 +88,83 @@ class LLMRAGQuestionGenerator:
         """
         lines = [line.strip("- •\t ") for line in text.split("\n") if line.strip()]
         questions = [line for line in lines if line.endswith("?")]
-        return questions[:5]
+        return questions[:3]
+
+
+def load_json_file(file_path: Path) -> Any:
+    """
+    Load and parse a JSON file.
+    
+    Args:
+        file_path: Path to the JSON file
+        
+    Returns:
+        Parsed JSON data
+    """
+    if not file_path.exists():
+        raise FileNotFoundError(f"File not found: {file_path}")
+    
+    with open(file_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
 
 
 # -----------------------------
 # Example usage (thesis-style input)
 # -----------------------------
 if __name__ == "__main__":
-    workload_features = {
-        "size": 9,
-        "read_ratio": 1.0,
-        "group_by_ratio": 0.89,
-        "order_by_ratio": 0.89,
-        "avg_query_length": 281.9,
-        "avg_joins": 1.2,
-        "filter_ratio": 0.89,
-    }
-
-    query_plans = [
-        "Merge Join(cost=1915.8)(Index Scan(cost=1016.9); Index Scan(cost=1066.1))",
-        "Aggregate(cost=1004.1)(Seq Scan(cost=698.5))",
-        "Hash Join(cost=2827.2)(Seq Scan(cost=896.0); Seq Scan(cost=1116.4))",
-    ]
-
-    inner_metrics = {
-        "buffer_hit_ratio": 0.96,
-        "avg_response_time": 166.5,
-        "lock_wait": 0.02,
-        "rows_returned": 1408,
-        "deadlocks": 0,
-    }
-
-    generator = LLMRAGQuestionGenerator()
-    questions = generator.generate_questions(
-        workload_features, query_plans, inner_metrics
-    )
-    print("Generated RAG Questions:",questions)
-    # for i, q in enumerate(questions, 1):
-    #     print(f"Q{i}: {q}")
+    # Get the script's directory and construct paths to input files
+    script_dir = Path(__file__).parent.parent
+    input_dir = script_dir / "olap_input_files"
+    
+    # Define input file paths
+    workload_features_path = input_dir / "workload_features.json"
+    query_plans_path = input_dir / "query_plans.json"
+    inner_metrics_path = input_dir / "job_0_internal_metrics.json"
+    
+    try:
+        # Load data from JSON files
+        print(f"Loading workload features from: {workload_features_path}")
+        workload_features = load_json_file(workload_features_path)
+        
+        print(f"Loading query plans from: {query_plans_path}")
+        query_plans_data = load_json_file(query_plans_path)
+        # Extract the query_plans list from the JSON structure
+        query_plans = query_plans_data.get("query_plans", []) if isinstance(query_plans_data, dict) else query_plans_data
+        
+        print(f"Loading inner metrics from: {inner_metrics_path}")
+        inner_metrics = load_json_file(inner_metrics_path)
+        
+        print("\n" + "="*80)
+        print("Loaded Data Summary:")
+        print("="*80)
+        print(f"Workload Features: {len(workload_features)} features")
+        print(f"Query Plans: {len(query_plans)} plans")
+        print(f"Inner Metrics: {len(inner_metrics)} metrics")
+        print("="*80 + "\n")
+        
+        # Generate questions
+        generator = LLMRAGQuestionGenerator()
+        print("Generating RAG questions...")
+        questions = generator.generate_questions(
+            workload_features, query_plans, inner_metrics
+        )
+        
+        print("\n" + "="*80)
+        print("Generated RAG Questions:")
+        print("="*80)
+        for i, q in enumerate(questions, 1):
+            print(f"Q{i}: {q}")
+        print("="*80)
+        
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        print("\nPlease ensure the following files exist:")
+        print(f"  - {workload_features_path}")
+        print(f"  - {query_plans_path}")
+        print(f"  - {inner_metrics_path}")
+    except json.JSONDecodeError as e:
+        print(f"Error parsing JSON file: {e}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()

@@ -8,3 +8,4 @@ class AgentState(TypedDict):
     e2etune_input: str
     final_response: Optional[str]
     ram: Optional[int]
+    cpu_cores: Optional[int]

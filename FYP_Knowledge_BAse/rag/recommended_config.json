@@ -1,0 +1,8 @@
+{
+  "work_mem": "10240 - 51200",
+  "maintenance_work_mem": 2097152,
+  "temp_file_limit": "10485760 - 52428800",
+  "shared_buffers": 1310720,
+  "effective_cache_size": "2621440 - 3932160",
+  "effective_io_concurrency": "2\u202f\u2013\u202f4 for HDDs, 200\u202f\u2013\u202f300 for SSDs/NVMe"
+}

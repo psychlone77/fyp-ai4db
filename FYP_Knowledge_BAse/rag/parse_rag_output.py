@@ -468,6 +468,22 @@ def format_output(knobs: List[Dict], system_ram_gb: float = 40) -> str:
     
     return "\n".join(output)
 
+def create_config_format(knobs: List[Dict]) -> Dict:
+    """Create simple knob_name: converted_value format for JSON output"""
+    config = {}
+    
+    for knob in knobs:
+        knob_name = knob['knob_name']
+        converted_value = knob.get('converted_value')
+        
+        if converted_value is not None:
+            config[knob_name] = converted_value
+        else:
+            # If conversion failed, keep original value
+            config[knob_name] = knob.get('recommended_value', 'N/A')
+    
+    return config
+
 def main():
     """Main execution function"""
     system_ram_gb = RAM  # Use global RAM setting
@@ -487,16 +503,52 @@ def main():
     formatted_output = format_output(validated_knobs, system_ram_gb)
     print(formatted_output)
     
-    # Save to JSON
-    output_file = script_dir / 'structured_knob_recommendations.json'
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump({
-            'total_knobs': len(validated_knobs),
-            'system_ram_gb': system_ram_gb,
-            'knobs': validated_knobs
-        }, f, indent=2)
+    # Create simple config format
+    simple_config = create_config_format(validated_knobs)
     
-    print(f"\nStructured output saved to: {output_file}")
+    #Save detailed TXT with all information
+    detailed_output_file = script_dir / 'structured_knob_recommendations.txt'
+    with open(detailed_output_file, 'w', encoding='utf-8') as f:
+        f.write(formatted_output)
+        f.write("\n\n")
+        f.write("=" * 110)
+        # f.write("\nDETAILED KNOB INFORMATION\n")
+        # f.write("=" * 110)
+        # f.write(f"\n\nTotal Knobs: {len(validated_knobs)}\n")
+        # f.write(f"System RAM: {system_ram_gb} GB\n\n")
+        
+        # for i, knob in enumerate(validated_knobs, 1):
+        #     f.write(f"\n{'-' * 110}\n")
+        #     f.write(f"Knob {i}: {knob['knob_name']}\n")
+        #     f.write(f"{'-' * 110}\n")
+        #     f.write(f"Original Recommendation: {knob.get('recommended_value', 'N/A')}\n")
+        #     f.write(f"Converted Value: {knob.get('converted_value', 'N/A')}\n")
+            
+        #     if knob.get('is_range'):
+        #         f.write(f"Min: {knob.get('converted_min')}\n")
+        #         f.write(f"Max: {knob.get('converted_max')}\n")
+            
+        #     f.write(f"Target Unit: {knob.get('target_unit', 'N/A')}\n")
+        #     f.write(f"Workload Context: {knob.get('workload_context', 'N/A')}\n")
+        #     f.write(f"Reasoning: {knob.get('reasoning', 'N/A')}\n")
+            
+        #     schema = knob.get('schema_info', {})
+        #     f.write(f"\nSchema Information:\n")
+        #     f.write(f"  Type: {schema.get('type', 'N/A')}\n")
+        #     f.write(f"  Min: {schema.get('min', 'N/A')}\n")
+        #     f.write(f"  Max: {schema.get('max', 'N/A')}\n")
+        #     f.write(f"  Default: {schema.get('default', 'N/A')}\n")
+        #     f.write(f"  Step: {schema.get('step', 'N/A')}\n")
+        #     f.write(f"  Unit: {schema.get('unit', 'N/A')}\n")
+
+        
+    # Save simple config format JSON
+    config_output_file = script_dir / 'recommended_config.json'
+    with open(config_output_file, 'w', encoding='utf-8') as f:
+        json.dump(simple_config, f, indent=2)
+    
+    # print(f"\nDetailed output saved to: {detailed_output_file}")
+    print(f"Config format saved to: {config_output_file}")
     
     
 if __name__ == "__main__":

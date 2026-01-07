@@ -8,105 +8,49 @@ STRUCTURED KNOB RECOMMENDATIONS (System RAM: 40 GB)
    Range: [10240 - 51200]
    Target Unit: KB 
    Workload Context: OLAP
-   Reasoning: Keeps sorts and aggregates in memory, avoiding disk spills for large GROUP BY/ORDER BY queries
+   Reasoning: Allows most sorts and hashes to stay in memory, reducing disk spills for analytical queries.
    Schema: type=integer, range=[64, 2147483647], default=4096
 
 2. maintenance_work_mem
-   Original Recommendation: ≈ 5 % of system RAM
+   Original Recommendation: 5 % of total system RAM
    Converted Value: 2097152
    Target Unit: KB 
    Workload Context: OLAP
-   Reasoning: Provides enough memory for bulk index builds and VACUUM, improving maintenance task speed
+   Reasoning: Provides enough memory for maintenance tasks like index builds and vacuum without starving other processes.
    Schema: type=integer, range=[1024, 2147483647], default=65536
 
-3. shared_buffers
-   Original Recommendation: 25 % – 40 % of total system RAM
-   Converted Value: 1310720 - 2097152
-   Range: [1310720 - 2097152]
+3. temp_file_limit
+   Original Recommendation: 10 GB – 50 GB per session
+   Converted Value: 10485760 - 52428800
+   Range: [10485760 - 52428800]
+   Target Unit: KB 
+   Workload Context: OLAP
+   Reasoning: Prevents runaway temporary file growth while still permitting occasional spills during large operations.
+   Schema: type=integer, range=[-1, 2147483647], default=-1
+
+4. shared_buffers
+   Original Recommendation: ≈ 25 % of total system RAM
+   Converted Value: 1310720
    Target Unit: 8KB  
    Workload Context: OLAP
-   Reasoning: Larger buffer pool raises hit ratio, reducing I/O for analytical scans
+   Reasoning: Caches a substantial portion of data pages in PostgreSQL memory, lowering physical reads.
    Schema: type=integer, range=[16, 4194304], default=1024
 
-4. checkpoint_timeout
-   Original Recommendation: 30 minutes – 1 hour
-   Converted Value: 1800 - 3600
-   Range: [1800 - 3600]
-   Target Unit:  s
-   Workload Context: OLAP
-   Reasoning: Longer intervals reduce checkpoint I/O spikes, benefiting read‑heavy workloads
-   Schema: type=integer, range=[30, 3600], default=300
-
-5. checkpoint_completion_target
-   Original Recommendation: 0.9
-   Converted Value: 0.9
-   Target Unit: fraction
-   Workload Context: OLAP
-   Reasoning: Spreads checkpoint writes over most of the interval, flattening I/O
-   Schema: type=float, range=[0, 1], default=0.9
-
-6. wal_buffers
-   Original Recommendation: 16 MB
-   Converted Value: 2048
+5. effective_cache_size
+   Original Recommendation: ≈ 50 % – 75 % of total system RAM
+   Converted Value: 2621440 - 3932160
+   Range: [2621440 - 3932160]
    Target Unit: 8KB  
    Workload Context: OLAP
-   Reasoning: Modest buffer suffices for analytical workloads while conserving shared memory
-   Schema: type=integer, range=[-1, 131072], default=-1
+   Reasoning: Informs the planner that ample OS cache is available, encouraging index scans and reducing sequential scans.
+   Schema: type=integer, range=[1, 2147483647], default=524288
 
-7. autovacuum_naptime
-   Original Recommendation: 60 s
-   Converted Value: 60
-   Target Unit: s
+6. effective_io_concurrency
+   Original Recommendation: 2 – 4 for HDDs, 200 – 300 for SSDs/NVMe
+   Converted Value: [Could not convert]
    Workload Context: OLAP
-   Reasoning: Frequent autovacuum keeps tables tidy, improving parallel scan efficiency
-   Schema: type=integer, range=[1, 2147483], default=60
+   Reasoning: Guides the planner on how many concurrent I/O operations the storage can handle, improving plan choices.
+   Schema: type=integer, range=[0, 1000], default=1
 
-8. autovacuum_vacuum_scale_factor
-   Original Recommendation: 0.1
-   Converted Value: 0.1
-   Target Unit: percentage
-   Workload Context: OLAP
-   Reasoning: Prevents dead tuple accumulation, preserving index efficiency
-   Schema: type=float, range=[0, 100], default=0.2
 
-9. autovacuum_analyze_scale_factor
-   Original Recommendation: 0.05
-   Converted Value: 0.05
-   Target Unit: percentage
-   Workload Context: OLAP
-   Reasoning: Ensures fresh statistics for accurate planner estimates on high‑filter/join queries
-   Schema: type=float, range=[0, 100], default=0.1
-
-10. autovacuum_vacuum_threshold
-   Original Recommendation: 50
-   Converted Value: 50
-   Target Unit: count
-   Workload Context: OLAP
-   Reasoning: Guarantees small tables are vacuumed promptly, avoiding bloat
-   Schema: type=integer, range=[0, 2147483647], default=50
-
-11. autovacuum_analyze_threshold
-   Original Recommendation: 50
-   Converted Value: 50
-   Target Unit: count
-   Workload Context: OLAP
-   Reasoning: Ensures timely stats updates for small tables, aiding join cardinality estimation
-   Schema: type=integer, range=[0, 2147483647], default=50
-
-12. autovacuum_max_workers
-   Original Recommendation: 4 – 6
-   Converted Value: 4 - 6
-   Range: [4 - 6]
-   Target Unit: count
-   Workload Context: OLAP
-   Reasoning: Allows concurrent vacuum/analyze without starving user queries
-   Schema: type=integer, range=[1, 200], default=3
-
-13. autovacuum_vacuum_cost_limit
-   Original Recommendation: 500 – 1000
-   Converted Value: 500 - 1000
-   Range: [500 - 1000]
-   Target Unit: count
-   Workload Context: OLAP
-   Reasoning: Higher limit speeds up vacuum, reducing dead‑tuple window at the cost of more I/O
-   Schema: type=integer, range=[-1, 10000], default=-1
+==============================================================================================================

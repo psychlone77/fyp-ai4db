@@ -11,7 +11,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain_huggingface import HuggingFaceEmbeddings
 from rag_question_generator import LLMRAGQuestionGenerator
-from example_input import workload_features, query_plans, inner_metrics
+
 load_dotenv()
 
 # Load documents from resources folder
@@ -91,7 +91,7 @@ Answer:"""
     )
     
     # Create retriever
-    retriever = vector_store.as_retriever(search_kwargs={"k":3})
+    retriever = vector_store.as_retriever(search_kwargs={"k": 3})
     
     # Create chain using LCEL
     rag_chain = (
@@ -120,76 +120,133 @@ def query_olap_parameters(rag_chain, retriever, query: str):
         "source_documents": source_docs
     }
 
+def load_json_file(file_path: Path):
+    """Load and parse a JSON file"""
+    if not file_path.exists():
+        raise FileNotFoundError(f"File not found: {file_path}")
+    
+    with open(file_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
 # Main execution
 def main():
     # Get the directory where this script is located
     script_dir = Path(__file__).parent
     resources_path = script_dir.parent / "resources"
+    input_dir = script_dir.parent / "olap_input_files"
     
-    # Check if vector store already exists
-    if os.path.exists("faiss_index"):
-        print("Loading existing vector store...")
-        vector_store = load_vector_store()
-        print("Vector store loaded")
-    else:
-        # Step 1: Load documents
-        print("Loading documents...")
-        documents = load_documents(resources_path)
-        print(f"Loaded {len(documents)} documents")
+    # Define input file paths
+    workload_features_path = input_dir / "workload_features.json"
+    query_plans_path = input_dir / "query_plans.json"
+    inner_metrics_path = input_dir / "job_0_internal_metrics.json"
+    
+    try:
+        # Check if vector store already exists
+        if os.path.exists("faiss_index"):
+            print("Loading existing vector store...")
+            vector_store = load_vector_store()
+            print("Vector store loaded")
+        else:
+            # Step 1: Load documents
+            print("Loading documents...")
+            documents = load_documents(str(resources_path))
+            print(f"Loaded {len(documents)} documents")
+            
+            # Step 2: Create chunks
+            print("\nCreating chunks...")
+            chunks = create_chunks(documents)
+            print(f"Created {len(chunks)} chunks")
+            
+            # Step 3: Create vector store
+            print("\nCreating vector store...")
+            vector_store = create_vector_store(chunks)
+            print("Vector store created and saved")
         
-        # Step 2: Create chunks
-        print("\nCreating chunks...")
-        chunks = create_chunks(documents)
-        print(f"Created {len(chunks)} chunks")
+        # Step 4: Create RAG chain
+        print("\nCreating RAG chain...")
+        rag_chain, retriever = create_rag_chain(vector_store)
         
-        # Step 3: Create vector store
-        print("\nCreating vector store...")
-        vector_store = create_vector_store(chunks)
-        print("Vector store created and saved")
-    
-    # Step 4: Create RAG chain
-    print("\nCreating RAG chain...")
-    rag_chain, retriever = create_rag_chain(vector_store)
-
-    # Step 5: Query examples
-    generator = LLMRAGQuestionGenerator()
-    queries = generator.generate_questions(
-        workload_features, query_plans, inner_metrics
-    )
-   
-    # queries = [
-    #     "What parameters that mostly affect the query performance in OLAP workloads?",
-    #     "What are the key OLAP tuning parameters and their recommended optimal values?",
-        
-    # ]
-    
-    print("\n" + "="*60)
-    print("OLAP PARAMETER EXTRACTION RAG")
-    print("="*60)
-    
-    # Prepare results list
-    results = []
-    for query in queries:
-        print(f"\nQuery: {query}")
-        print("-" * 60)
-        result = query_olap_parameters(rag_chain, retriever, query)
-        print(f"Answer: {result['answer']}")
-        print(f"\nSources: {[doc.metadata.get('source', 'Unknown') for doc in result['source_documents']]}")
+        # Step 5: Load data from JSON files
+        print("\n" + "="*60)
+        print("Loading input data...")
         print("="*60)
         
-        # Add to results list
-        results.append({
-            "query": query,
-            "answer": result['answer'],
-            "sources": [doc.metadata.get('source', 'Unknown') for doc in result['source_documents']]
-        })
-    
-    # Save to JSON file
-    output_file = script_dir / "rag_results.json"
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
-    
-    print(f"\nResults saved to {output_file}")
+        print(f"Loading workload features from: {workload_features_path}")
+        workload_features = load_json_file(workload_features_path)
+        
+        print(f"Loading query plans from: {query_plans_path}")
+        query_plans_data = load_json_file(query_plans_path)
+        # Extract the query_plans list from the JSON structure
+        query_plans = query_plans_data.get("query_plans", []) if isinstance(query_plans_data, dict) else query_plans_data
+        
+        print(f"Loading inner metrics from: {inner_metrics_path}")
+        inner_metrics = load_json_file(inner_metrics_path)
+        
+        print("\nData loaded successfully!")
+        print(f"- Workload Features: {len(workload_features)} features")
+        print(f"- Query Plans: {len(query_plans)} plans")
+        print(f"- Inner Metrics: {len(inner_metrics)} metrics")
+        
+        # Step 6: Generate questions using LLM
+        print("\n" + "="*60)
+        print("Generating RAG questions from workload data...")
+        print("="*60)
+        
+        generator = LLMRAGQuestionGenerator()
+        queries = generator.generate_questions(
+            workload_features, query_plans, inner_metrics
+        )
+        
+        print(f"\nGenerated {len(queries)} questions:")
+        for i, q in enumerate(queries, 1):
+            print(f"  {i}. {q}")
+        
+        # Step 7: Query the RAG system
+        print("\n" + "="*60)
+        print("OLAP PARAMETER EXTRACTION RAG")
+        print("="*60)
+        
+        # Prepare results list
+        results = []
+        
+        for i, query in enumerate(queries, 1):
+            print(f"\n[Query {i}/{len(queries)}]")
+            print(f"Question: {query}")
+            print("-" * 60)
+            
+            result = query_olap_parameters(rag_chain, retriever, query)
+            
+            print(f"Answer: {result['answer']}")
+            print(f"\nSources: {[doc.metadata.get('source', 'Unknown') for doc in result['source_documents']]}")
+            print("="*60)
+            
+            # Add to results list
+            results.append({
+                "query": query,
+                "answer": result['answer'],
+                "sources": [doc.metadata.get('source', 'Unknown') for doc in result['source_documents']],
+                "source_documents": [doc.page_content for doc in result['source_documents']]
+            })
+        
+        # Step 8: Save results to JSON file
+        output_file = script_dir / "rag_results.json"
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+        
+        print(f"\n✓ Results saved to {output_file}")
+        
+    except FileNotFoundError as e:
+        print(f"\nError: {e}")
+        print("\nPlease ensure the following files exist:")
+        print(f"  - {workload_features_path}")
+        print(f"  - {query_plans_path}")
+        print(f"  - {inner_metrics_path}")
+    except json.JSONDecodeError as e:
+        print(f"\nError parsing JSON file: {e}")
+    except Exception as e:
+        print(f"\nUnexpected error: {e}")
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()
