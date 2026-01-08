@@ -5,14 +5,21 @@ from datetime import datetime
 import re
 from url_list import urls
 
-def extract_domain_name(url):
-    """Extract domain name from URL using regex.
+def extract_filename_from_url(url):
+    """Extract a unique filename from URL using domain and path.
     
     """
-    match = re.search(r'www\.([a-zA-Z0-9-]+)\.', url)
-    if match:
-        return match.group(1)
-    return "data"
+    # Extract domain name
+    domain_match = re.search(r'www\.([a-zA-Z0-9-]+)\.', url)
+    domain = domain_match.group(1) if domain_match else "data"
+    
+    # Extract last meaningful part of the path (before .html or similar)
+    path_match = re.search(r'/([a-zA-Z0-9_-]+)(?:\.\w+)?$', url)
+    if path_match:
+        path_part = path_match.group(1)
+        return f"{domain}-{path_part}"
+    
+    return domain
 
 async def main():
     # Create resources folder if it doesn't exist
@@ -27,13 +34,13 @@ async def main():
                 url=url,
             )
             
-            # Extract domain name for filename
-            domain_name = extract_domain_name(url)
+            # Extract unique filename from URL
+            filename = extract_filename_from_url(url)
             
             # Save full content as markdown in resources folder
-            md_filename = os.path.join(resources_folder, f"{domain_name}.md")
+            md_filename = os.path.join(resources_folder, f"{filename}.md")
             with open(md_filename, 'w', encoding='utf-8') as f:
-                f.write(f"# {domain_name.upper()}\n\n")
+                f.write(f"# {filename.upper()}\n\n")
                 f.write(f"**Source:** {result.url}\n")
                 f.write(f"**Generated:** {datetime.now().isoformat()}\n\n")
                 f.write("---\n\n")

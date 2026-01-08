@@ -1,7 +1,7 @@
-# TIGERDATA
+# TIGERDATA-POSTGRESQL-PERFORMANCE-TUNING-KEY-PARAMETERS
 
 **Source:** https://www.tigerdata.com/learn/postgresql-performance-tuning-key-parameters
-**Generated:** 2026-01-08T13:12:30.032759
+**Generated:** 2026-01-08T14:11:17.894782
 
 ---
 

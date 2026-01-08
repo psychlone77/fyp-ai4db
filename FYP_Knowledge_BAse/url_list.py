@@ -4,4 +4,5 @@ urls=["https://www.enterprisedb.com/postgres-tutorials/comprehensive-guide-how-t
 "https://www.percona.com/blog/tuning-postgresql-database-parameters-to-optimize-performance",
 "https://www.crunchydata.com/blog/postgres-tuning-and-performance-for-analytics-data",
 "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server",
-"https://www.postgresql.org/docs/current/runtime-config-resource.html"] 
+"https://www.postgresql.org/docs/current/runtime-config-resource.html",
+"https://www.postgresql.org/docs/current/transaction-iso.html"] 

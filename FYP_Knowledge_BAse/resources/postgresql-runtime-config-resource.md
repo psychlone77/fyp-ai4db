@@ -1,7 +1,7 @@
-# POSTGRESQL
+# POSTGRESQL-RUNTIME-CONFIG-RESOURCE
 
 **Source:** https://www.postgresql.org/docs/current/runtime-config-resource.html
-**Generated:** 2026-01-08T13:12:49.593047
+**Generated:** 2026-01-08T14:11:38.253065
 
 ---
 

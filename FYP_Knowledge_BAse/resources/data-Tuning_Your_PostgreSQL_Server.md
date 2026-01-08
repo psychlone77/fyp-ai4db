@@ -1,7 +1,7 @@
-# DATA
+# DATA-TUNING_YOUR_POSTGRESQL_SERVER
 
 **Source:** https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server
-**Generated:** 2026-01-08T13:12:45.333384
+**Generated:** 2026-01-08T14:11:34.141569
 
 ---
 

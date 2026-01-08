@@ -1,7 +1,7 @@
-# PERCONA
+# PERCONA-TUNING-POSTGRESQL-DATABASE-PARAMETERS-TO-OPTIMIZE-PERFORMANCE
 
 **Source:** https://www.percona.com/blog/tuning-postgresql-database-parameters-to-optimize-performance
-**Generated:** 2026-01-08T13:12:38.372094
+**Generated:** 2026-01-08T14:11:27.087750
 
 ---
 
