@@ -1,7 +1,7 @@
 # PERCONA
 
 **Source:** https://www.percona.com/blog/tuning-postgresql-database-parameters-to-optimize-performance
-**Generated:** 2025-12-07T10:56:54.439723
+**Generated:** 2026-01-08T13:12:38.372094
 
 ---
 
@@ -406,28 +406,28 @@ Email*
 ![right-img](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E)
 ## Related Blog Articles
 ### RECOMMENDED ARTICLES
-[ ![Community Erosion Post License Change: Quantifying the Power of Open Source](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201216%20681'%3E%3C/svg%3E) ](https://www.percona.com/blog/community-erosion-post-license-change-quantifying-the-power-of-open-source/)
-December 5, 2025
-[Martin Visser](https://www.percona.com/blog/author/martin-visser)
-## [Community Erosion Post License Change: Quantifying the Power of Open Source ](https://www.percona.com/blog/community-erosion-post-license-change-quantifying-the-power-of-open-source/)
-[Insight for DBAs](https://www.percona.com/blog/category/dba-insight/) [Open Source](https://www.percona.com/blog/category/open-source/) [Valkey](https://www.percona.com/blog/category/valkey/)
-[ ![We Believe in Freedom](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201216%20681'%3E%3C/svg%3E) ](https://www.percona.com/blog/we-believe-in-freedom/)
-December 2, 2025
-[Peter Zaitsev](https://www.percona.com/blog/author/pz)
-## [We Believe in Freedom ](https://www.percona.com/blog/we-believe-in-freedom/)
-[Open Source](https://www.percona.com/blog/category/open-source/)
-[ ![Impact of Starting PostgreSQL Service Manually in an Active Patroni Cluster](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201216%20521'%3E%3C/svg%3E) ](https://www.percona.com/blog/impact-of-starting-postgresql-service-manually-in-an-active-patroni-cluster/)
-December 1, 2025
-[Ashish Joshi](https://www.percona.com/blog/author/ashish-joshi)
-## [Impact of Starting PostgreSQL Service Manually in an Active Patroni Cluster ](https://www.percona.com/blog/impact-of-starting-postgresql-service-manually-in-an-active-patroni-cluster/)
-[Insight for DBAs](https://www.percona.com/blog/category/dba-insight/) [PostgreSQL](https://www.percona.com/blog/category/postgresql/)
+[ ![JavaScript Stored Routines in Percona Server for MySQL: A New Era for Database Programmability](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201216%20681'%3E%3C/svg%3E) ](https://www.percona.com/blog/javascript-stored-routines-in-percona-server-for-mysql-a-new-era-for-database-programmability/)
+January 5, 2026
+[Dennis Kittrell](https://www.percona.com/blog/author/dennis-kittrell)
+## [JavaScript Stored Routines in Percona Server for MySQL: A New Era for Database Programmability ](https://www.percona.com/blog/javascript-stored-routines-in-percona-server-for-mysql-a-new-era-for-database-programmability/)
+[Insight for DBAs](https://www.percona.com/blog/category/dba-insight/) [MySQL](https://www.percona.com/blog/category/mysql/) [Percona Software](https://www.percona.com/blog/category/percona-software/)
+[ ![Running Databases on Kubernetes: A Practical Guide to Risks, Benefits, and Best Practices](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201216%20681'%3E%3C/svg%3E) ](https://www.percona.com/blog/running-databases-on-kubernetes-a-practical-guide-to-risks-benefits-and-best-practices/)
+January 2, 2026
+[David Quilty](https://www.percona.com/blog/author/david-quilty)
+## [Running Databases on Kubernetes: A Practical Guide to Risks, Benefits, and Best Practices ](https://www.percona.com/blog/running-databases-on-kubernetes-a-practical-guide-to-risks-benefits-and-best-practices/)
+[Cloud](https://www.percona.com/blog/category/cloud/) [Insight for DBAs](https://www.percona.com/blog/category/dba-insight/) [Open Source](https://www.percona.com/blog/category/open-source/)
+[ ![Building a Multi-Cloud Strategy: Cut Costs, Improve Resilience, and Avoid Lock-In](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201216%20681'%3E%3C/svg%3E) ](https://www.percona.com/blog/building-a-multi-cloud-strategy-cut-costs-improve-resilience-and-avoid-lock-in/)
+December 31, 2025
+[David Quilty](https://www.percona.com/blog/author/david-quilty)
+## [Building a Multi-Cloud Strategy: Cut Costs, Improve Resilience, and Avoid Lock-In ](https://www.percona.com/blog/building-a-multi-cloud-strategy-cut-costs-improve-resilience-and-avoid-lock-in/)
+[Cloud](https://www.percona.com/blog/category/cloud/) [Insight for DBAs](https://www.percona.com/blog/category/dba-insight/) [Open Source](https://www.percona.com/blog/category/open-source/)
 ### MOST POPULAR ARTICLES
 [ ![Deploy Django on Kubernetes With Percona Operator for PostgreSQL](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201024%201024'%3E%3C/svg%3E) ](https://www.percona.com/blog/deploy-django-on-kubernetes-with-percona-operator-for-postgresql/)
 June 20, 2023
 [Sergey Pronin](https://www.percona.com/blog/author/sergey-pronin)
 ## [Deploy Django on Kubernetes With Percona Operator for PostgreSQL ](https://www.percona.com/blog/deploy-django-on-kubernetes-with-percona-operator-for-postgresql/)
 [Cloud](https://www.percona.com/blog/category/cloud/) [Insight for Developers](https://www.percona.com/blog/category/developer-insight/) [Percona Software](https://www.percona.com/blog/category/percona-software/) [PostgreSQL](https://www.percona.com/blog/category/postgresql/)
-[ ![MySQL Performance Tuning: Maximizing Database Efficiency and Speed](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201024%201024'%3E%3C/svg%3E) ](https://www.percona.com/blog/mysql-101-parameters-to-tune-for-mysql-performance/)
+[ ![MySQL Performance Tuning: Maximizing Database Efficiency and Speed](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201500%201125'%3E%3C/svg%3E) ](https://www.percona.com/blog/mysql-101-parameters-to-tune-for-mysql-performance/)
 February 1, 2025
 [Brian Sumpter](https://www.percona.com/blog/author/brian-sumpter)
 ## [MySQL Performance Tuning: Maximizing Database Efficiency and Speed ](https://www.percona.com/blog/mysql-101-parameters-to-tune-for-mysql-performance/)
@@ -520,7 +520,7 @@ By submitting my information I agree that Percona may use my personal data in se
 
 
 MySQL, PostgreSQL, InnoDB, MariaDB, MongoDB and Kubernetes are trademarks for their respective owners.
-Copyright © 2006-2025 Percona LLC.
+Copyright © 2006-2026 Percona LLC.
 wpDiscuz
 Insert
 [](javascript:; "Close")[](javascript:; "Next")[](javascript:; "Previous")

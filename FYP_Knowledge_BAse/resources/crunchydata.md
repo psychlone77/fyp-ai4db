@@ -1,7 +1,7 @@
 # CRUNCHYDATA
 
 **Source:** https://www.crunchydata.com/blog/postgres-tuning-and-performance-for-analytics-data
-**Generated:** 2025-12-07T10:56:57.499213
+**Generated:** 2026-01-08T13:12:41.496996
 
 ---
 
@@ -22,11 +22,11 @@ Karen Jex
 Jan 9, 2025·19 min read
 [More by this author](https://www.crunchydata.com/blog/author/karen-jex)
 ## Latest Articles
+  * [Postgres 18 New Default for Data Checksums and How to Deal with Upgrades](https://www.crunchydata.com/blog/postgres-18-new-default-for-data-checksums-and-how-to-deal-with-upgrades)
+  * [PostGIS Performance: Simplification](https://www.crunchydata.com/blog/postgis-performance-simplification)
   * [Postgres Scan Types in EXPLAIN Plans](https://www.crunchydata.com/blog/postgres-scan-types-in-explain-plans)
   * [PostGIS Performance: Data Sampling](https://www.crunchydata.com/blog/postgis-performance-data-sampling)
   * [PostGIS Performance: Intersection Predicates and Overlays](https://www.crunchydata.com/blog/postgis-performance-intersection-predicates-and-overlays)
-  * [Postgres Internals Hiding in Plain Sight](https://www.crunchydata.com/blog/postgres-internals-hiding-in-plain-sight)
-  * [PostGIS Performance: Improve Bounding Boxes with Decompose and Subdivide](https://www.crunchydata.com/blog/postgis-performance-improve-bounding-boxes-with-decompose-and-subdivide)
 
 
 [Analytics](https://www.crunchydata.com/blog/topic/analytics)
@@ -481,16 +481,16 @@ Do not fill this out please: Do not fill this out please, it will be pre-filled:
 Email address
 Join The List
 ## Related Articles
+  * Dec 11, 2025·4 min read
+[Postgres 18 New Default for Data Checksums and How to Deal with Upgrades](https://www.crunchydata.com/blog/postgres-18-new-default-for-data-checksums-and-how-to-deal-with-upgrades)
+  * Dec 9, 2025·3 min read
+[PostGIS Performance: Simplification](https://www.crunchydata.com/blog/postgis-performance-simplification)
   * Dec 4, 2025·9 min read
 [Postgres Scan Types in EXPLAIN Plans](https://www.crunchydata.com/blog/postgres-scan-types-in-explain-plans)
   * Nov 21, 2025·3 min read
 [PostGIS Performance: Data Sampling](https://www.crunchydata.com/blog/postgis-performance-data-sampling)
   * Nov 14, 2025·3 min read
 [PostGIS Performance: Intersection Predicates and Overlays](https://www.crunchydata.com/blog/postgis-performance-intersection-predicates-and-overlays)
-  * Nov 7, 2025·9 min read
-[Postgres Internals Hiding in Plain Sight](https://www.crunchydata.com/blog/postgres-internals-hiding-in-plain-sight)
-  * Nov 6, 2025·4 min read
-[PostGIS Performance: Improve Bounding Boxes with Decompose and Subdivide](https://www.crunchydata.com/blog/postgis-performance-improve-bounding-boxes-with-decompose-and-subdivide)
 
 
 
@@ -512,5 +512,5 @@ Subscribe to the Crunchy Data Newsletter and receive Postgres content every mont
 Do not fill this out please: Do not fill this out please, it will be pre-filled:
 Email address
 Subscribe
-© 2018-2025 Crunchy Data Solutions, Inc.
+© 2018-2026 Crunchy Data Solutions, Inc.
 [YouTube](https://www.youtube.com/c/CrunchyDataPostgres)[LinkedIn](https://www.linkedin.com/company/crunchy-data-solutions-inc-)[X](https://twitter.com/crunchydata)[GitHub](https://github.com/CrunchyData)

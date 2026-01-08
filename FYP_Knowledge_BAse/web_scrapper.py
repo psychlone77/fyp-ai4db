@@ -16,7 +16,8 @@ def extract_domain_name(url):
 
 async def main():
     # Create resources folder if it doesn't exist
-    resources_folder = "resources"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    resources_folder = os.path.join(script_dir, "resources")
     if not os.path.exists(resources_folder):
         os.makedirs(resources_folder)
     

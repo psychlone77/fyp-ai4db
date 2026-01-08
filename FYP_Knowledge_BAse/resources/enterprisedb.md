@@ -1,7 +1,7 @@
 # ENTERPRISEDB
 
 **Source:** https://www.enterprisedb.com/postgres-tutorials/comprehensive-guide-how-tune-database-parameters-and-configuration-postgresql
-**Generated:** 2025-12-07T10:56:44.403856
+**Generated:** 2026-01-08T13:12:26.387244
 
 ---
 
@@ -333,7 +333,7 @@ This factor basically tells the PostgreSQL query planner how much more (or less)
 These settings set size boundaries on the transaction log of PostgreSQL. Basically, this is the amount of data that can be written until a checkpoint is issued, which in turn syncs the in-memory data with the on-disk data.
 ### **max_fsm_pages**
 This option helps to control the free space map. When something is deleted from a table it isn't removed from the disk immediately. It is simply marked as "free" in the free space map. This space can then be reused for any new INSERTs that you do on the table. If your setup has a high rate of DELETEs and INSERTs it may be necessary to increase this value to avoid table bloat.
-Share this [ ](https://www.addtoany.com/share#url=https%3A%2F%2Fenterprisedb.com%2Fpostgres-tutorials%2Fcomprehensive-guide-how-tune-database-parameters-and-configuration-postgresql&title=How%20to%20Tune%20PostgreSQL%20Parameters%20and%20Configuration%20For%20Optimal%20Performance)
+Share this [Facebook](https://www.enterprisedb.com/#facebook)[X](https://www.enterprisedb.com/#x)[LinkedIn](https://www.enterprisedb.com/#linkedin)[Email](https://www.enterprisedb.com/#email) [](https://www.addtoany.com/share#url=https%3A%2F%2Fenterprisedb.com%2Fpostgres-tutorials%2Fcomprehensive-guide-how-tune-database-parameters-and-configuration-postgresql&title=How%20to%20Tune%20PostgreSQL%20Parameters%20and%20Configuration%20For%20Optimal%20Performance)
 ## Database Parameters & Tuning: FAQs
 What is the purpose of tuning PostgreSQL database parameters?_chevron_right_
 Tuning PostgreSQL database parameters is essential for optimizing performance based on specific workload requirements. By adjusting configurations like memory allocation and I/O settings, you can enhance transaction speed and data processing efficiency. Proper tuning can lead to:
@@ -432,7 +432,7 @@ Off
     * [Learning Library](https://www.enterprisedb.com/edb-learning-library)
   * Company
     * [About](https://www.enterprisedb.com/company)
-    * [Leadership](https://www.enterprisedb.com/company/leadership)
+    * [Leadership](https://www.enterprisedb.com/leadership-team)
     * [Press & News](https://www.enterprisedb.com/press-room)
     * [Careers](https://www.enterprisedb.com/careers)
     * [Partners](https://www.enterprisedb.com/partners)
@@ -440,7 +440,7 @@ Off
 
 
 ## Footer Copyright CTA
-  * © 2025 EDB
+  * © 2026 EDB
   * [Legal Notices](https://www.enterprisedb.com/legal)
   * [ESG](https://www.enterprisedb.com/sites/default/files/pdf/EDB_Sustainability_Report.pdf)
   * [Privacy Policy](https://www.enterprisedb.com/privacy-policy)
@@ -451,6 +451,11 @@ Off
 We use cookies on this site for operational, analytic, and marketing purposes, including to improve your site experience. For more information see our [Privacy Policy](https://www.enterprisedb.com/privacy-policy) and [Cookie Policy](https://www.enterprisedb.com/cookies-policy).
 Cookie preferences Okay, got it
 Cookie Preferences
-![](https://match.adsrvr.org/track/cmf/generic?ttd_pid=id17evj&ttd_tpi=1&ttd_puid=4ec7ba2f-8b17-4dae-a2d8-7f28b6e349dd|62f5e53f-95d9-4576-8573-c01c2ca84227)![](https://wec-assets.terminus.services/4ec7ba2f-8b17-4dae-a2d8-7f28b6e349dd/t.gif?d=62f5e53f-95d9-4576-8573-c01c2ca84227&s=385bfc73-13f1-4920-a8c0-0f029c13dcfb&p=https%3A%2F%2Fwww.enterprisedb.com%2Fpostgres-tutorials%2Fcomprehensive-guide-how-tune-database-parameters-and-configuration-postgresql&cb=1765085204231&t=Postgres%20Performance%20Tuning%20Parameters%20for%20Faster%20Queries&r=&e=page_viewed&u=312ead8b-8382-47ac-8065-d0e8d932e607-1765085204231)
+Copy link
+✓
+Thanks for sharing!
+Find any service
+[](https://www.addtoany.com "Share Buttons")
+[More…](https://www.enterprisedb.com/postgres-tutorials/comprehensive-guide-how-tune-database-parameters-and-configuration-postgresql#addtoany "Show all")
 ![](https://www.enterprisedb.com/postgres-tutorials/comprehensive-guide-how-tune-database-parameters-and-configuration-postgresql)
 [](https://www.enterprisedb.com/postgres-tutorials/comprehensive-guide-how-tune-database-parameters-and-configuration-postgresql)[](https://www.enterprisedb.com/postgres-tutorials/comprehensive-guide-how-tune-database-parameters-and-configuration-postgresql)
