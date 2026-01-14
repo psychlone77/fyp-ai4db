@@ -1,0 +1,106 @@
+{
+  "description": "Expected input format for the voting regressor model",
+  "input_shape": [
+    29
+  ],
+  "total_features": 29,
+  "feature_categories": {
+    "knob_configuration": {
+      "description": "Database knob settings (normalized to 0-1)",
+      "features": [
+        "cfg__shared_buffers",
+        "cfg__work_mem",
+        "cfg__maintenance_work_mem",
+        "cfg__effective_cache_size",
+        "cfg__max_connections",
+        "cfg__wal_buffers",
+        "cfg__checkpoint_completion_target",
+        "cfg__checkpoint_timeout",
+        "cfg__effective_io_concurrency",
+        "cfg__join_collapse_limit",
+        "cfg__from_collapse_limit",
+        "cfg__bgwriter_delay",
+        "cfg__bgwriter_lru_multiplier",
+        "cfg__default_statistics_target",
+        "cfg__max_parallel_workers_per_gather"
+      ],
+      "count": 15
+    },
+    "workload_metrics": {
+      "description": "Internal database metrics (normalized to 0-1)",
+      "features": [
+        "metrics__xact_commit",
+        "metrics__xact_rollback",
+        "metrics__blks_read",
+        "metrics__blks_hit",
+        "metrics__tup_returned",
+        "metrics__tup_fetched",
+        "metrics__tup_inserted",
+        "metrics__conflicts",
+        "metrics__tup_updated",
+        "metrics__tup_deleted",
+        "metrics__disk_read_count",
+        "metrics__disk_write_count",
+        "metrics__disk_read_bytes",
+        "metrics__disk_write_bytes"
+      ],
+      "count": 14
+    },
+    "categorical_encoded": {
+      "description": "One-hot encoded categorical features",
+      "features": [],
+      "count": 0
+    }
+  },
+  "all_feature_names": [
+    "cfg__shared_buffers",
+    "cfg__work_mem",
+    "cfg__maintenance_work_mem",
+    "cfg__effective_cache_size",
+    "cfg__max_connections",
+    "cfg__wal_buffers",
+    "cfg__checkpoint_completion_target",
+    "cfg__checkpoint_timeout",
+    "cfg__effective_io_concurrency",
+    "cfg__join_collapse_limit",
+    "cfg__from_collapse_limit",
+    "cfg__bgwriter_delay",
+    "cfg__bgwriter_lru_multiplier",
+    "cfg__default_statistics_target",
+    "cfg__max_parallel_workers_per_gather",
+    "metrics__xact_commit",
+    "metrics__xact_rollback",
+    "metrics__blks_read",
+    "metrics__blks_hit",
+    "metrics__tup_returned",
+    "metrics__tup_fetched",
+    "metrics__tup_inserted",
+    "metrics__conflicts",
+    "metrics__tup_updated",
+    "metrics__tup_deleted",
+    "metrics__disk_read_count",
+    "metrics__disk_write_count",
+    "metrics__disk_read_bytes",
+    "metrics__disk_write_bytes"
+  ],
+  "normalization_info": {
+    "knob_features": "Normalized using ranges from knob_config.json (min-max scaling)",
+    "metrics_features": "Normalized using training set min-max (clipped to 0-1)",
+    "categorical_features": "One-hot encoded with dummy_na=True"
+  },
+  "target_info": {
+    "description": "Cost values with log1p + per-workload minmax normalization",
+    "range": [
+      0.0,
+      1.0
+    ],
+    "transformation": "log1p -> per-workload minmax normalization"
+  },
+  "usage_example": {
+    "input_array_shape": [
+      1,
+      29
+    ],
+    "note": "Input should be numpy array or list with exact feature order as in 'all_feature_names'"
+  }
+}
